@@ -24,22 +24,17 @@
 }
 body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100dvh; padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
 .wrap { max-width: 480px; margin: 0 auto; padding: 20px 16px 80px; }
-
-@media (min-width: 780px) {
-  .wrap { max-width: 960px; padding: 32px 32px 60px; }
-  .desktop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .desktop-grid-3 { display: grid; grid-template-columns: 3fr 2fr; gap: 10px; }
-  .card { margin-bottom: 0; }
-  .phase-name { font-size: 28px; }
-  .days-num { font-size: 40px; }
-  .pillar-btn { padding: 20px 10px; }
-  .pillar-icon { font-size: 26px; }
-}
 .header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
 .logo { width: 30px; height: 30px; border-radius: 8px; background: #0f2952; border: 1px solid rgba(59,108,183,0.35); display: flex; align-items: center; justify-content: center; font-style: italic; font-family: Georgia, serif; color: var(--primary); font-size: 15px; font-weight: 700; }
 .header-label { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
 .label { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); display: block; }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 18px; margin-bottom: 10px; }
+
+/* flex containers handle their own spacing — no margin needed on children */
+.d-main { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+.d-col  { display: flex; flex-direction: column; gap: 10px; }
+.d-main > .card, .d-col > .card { margin-bottom: 0; }
+
 .week-row { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 10px; }
 .phase-name { font-size: 21px; font-weight: 700; line-height: 1.2; }
 .phase-sub { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
@@ -62,18 +57,18 @@ textarea:focus { border-color: rgba(59,108,183,0.5); }
 .goal-actions { display: flex; gap: 8px; margin-top: 8px; }
 .save-btn { background: var(--primary); color: white; border: none; border-radius: 10px; padding: 8px 18px; font-size: 12px; font-weight: 600; cursor: pointer; }
 .cancel-btn { background: none; border: none; color: var(--muted); font-size: 12px; cursor: pointer; padding: 8px; }
-.deadline-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.deadline-item { display: flex; gap: 10px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .deadline-item:last-child { border-bottom: none; padding-bottom: 0; }
 .deadline-item:first-child { padding-top: 0; }
-.dl-badge { flex-shrink: 0; min-width: 46px; padding: 3px 7px; border-radius: 7px; font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .12em; text-align: center; font-weight: 600; }
+.dl-badge { flex-shrink: 0; min-width: 44px; padding: 3px 6px; border-radius: 6px; font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .1em; text-align: center; font-weight: 600; }
 .dl-badge.math    { background: var(--primary-dim); color: var(--primary); }
 .dl-badge.reillum { background: var(--accent-dim);  color: var(--accent);  }
 .dl-badge.overdue { background: var(--red-dim);     color: var(--red);     }
 .dl-content { flex: 1; min-width: 0; }
 .dl-label { font-size: 13px; font-weight: 600; line-height: 1.3; }
-.dl-desc { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+.dl-desc { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
 .dl-right { flex-shrink: 0; text-align: right; }
-.dl-days { font-family: var(--mono); font-size: 10px; font-weight: 700; }
+.dl-days { font-family: var(--mono); font-size: 11px; font-weight: 700; }
 .dl-days.urgent { color: var(--red); }
 .dl-days.soon   { color: var(--accent); }
 .dl-days.ok     { color: var(--green); }
@@ -107,6 +102,49 @@ textarea:focus { border-color: rgba(59,108,183,0.5); }
 .rm-name.dim { color: rgba(240,244,255,0.32); }
 .rm-wks { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-left: 7px; }
 .rm-sub { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+
+/* ── Desktop: 3-column, one page ── */
+@media (min-width: 780px) {
+  .wrap { max-width: 1120px; padding: 16px 28px 20px; }
+  .header { margin-bottom: 10px; }
+  .card { border-radius: 14px; padding: 14px 16px; }
+
+  /* Phase card: compact */
+  .phase-name { font-size: 19px; }
+  .week-row { margin-top: 5px; }
+  .days-num { font-size: 24px; }
+  .phase-sub { font-size: 11px; margin-top: 2px; }
+
+  /* 3-column grid */
+  .d-main { display: grid; grid-template-columns: 240px 1fr 220px; gap: 8px; margin-bottom: 8px; }
+  .d-col  { gap: 8px; }
+
+  /* Upcoming: hide descriptions, tighter rows */
+  .dl-desc { display: none; }
+  .deadline-item { padding: 6px 0; }
+  .dl-label { font-size: 12px; }
+  .dl-days { font-size: 10px; }
+
+  /* Progress dots: smaller to fit narrower column */
+  .wdot { width: 10px; height: 10px; }
+  .week-grid { gap: 4px; margin-top: 8px; }
+  .legend { gap: 8px; margin-top: 8px; }
+
+  /* Pillar buttons: tighter */
+  .pillar-btn { padding: 10px 4px; gap: 5px; }
+  .pillar-icon { font-size: 17px; }
+  .today-lbl { margin-bottom: 8px; }
+
+  /* Roadmap: tighter */
+  .rm-item { margin-bottom: 7px; }
+  .rm-name { font-size: 12px; }
+  .rm-wks { font-size: 8px; }
+  .rm-sub { font-size: 10px; margin-top: 2px; }
+  .rm-dot { width: 12px; height: 12px; }
+
+  /* Self-test collapsed at bottom */
+  .d-test { margin-bottom: 0; }
+}
 </style>
 </head>
 <body>
@@ -117,8 +155,8 @@ textarea:focus { border-color: rgba(59,108,183,0.5); }
     <span class="header-label">Math Prep · Theo</span>
   </div>
 
-  <!-- Phase — full width -->
-  <div class="card" style="margin-bottom:10px">
+  <!-- Phase: full width -->
+  <div class="card">
     <span class="label" id="week-label">—</span>
     <div class="week-row">
       <div style="flex:1;min-width:0">
@@ -132,9 +170,11 @@ textarea:focus { border-color: rgba(59,108,183,0.5); }
     </div>
   </div>
 
-  <!-- Row 2: Today + Upcoming -->
-  <div class="desktop-grid" style="margin-bottom:10px">
-    <div style="display:flex;flex-direction:column;gap:10px">
+  <!-- 3-col on desktop / stacked on mobile -->
+  <div class="d-main">
+
+    <!-- Left col: Today + Goal -->
+    <div class="d-col">
       <div class="card">
         <span class="label today-lbl" id="today-lbl">Today</span>
         <div class="pillars">
@@ -159,6 +199,8 @@ textarea:focus { border-color: rgba(59,108,183,0.5); }
         </div>
       </div>
     </div>
+
+    <!-- Center col: Upcoming deadlines -->
     <div class="card">
       <div class="goal-header" style="margin-bottom:10px">
         <span class="label" style="margin:0">Upcoming</span>
@@ -166,33 +208,34 @@ textarea:focus { border-color: rgba(59,108,183,0.5); }
       </div>
       <div id="deadlines-list"><div class="dl-empty">Loading…</div></div>
     </div>
-  </div>
 
-  <!-- Row 3: Progress + Roadmap -->
-  <div class="desktop-grid-3" style="margin-bottom:10px">
-    <div style="display:flex;flex-direction:column;gap:10px">
+    <!-- Right col: Progress + Roadmap -->
+    <div class="d-col">
       <div class="card">
         <span class="label">Army progress · 43 weeks</span>
         <div class="week-grid" id="week-grid"></div>
         <div class="legend">
-          <div class="leg"><div class="leg-dot" style="background:rgba(59,108,183,0.55)"></div>Complete</div>
-          <div class="leg"><div class="leg-dot" style="background:rgba(59,108,183,0.22)"></div>Partial</div>
-          <div class="leg"><div class="leg-dot" style="background:rgba(255,255,255,0.07)"></div>Missed</div>
+          <div class="leg"><div class="leg-dot" style="background:rgba(59,108,183,0.55)"></div>Done</div>
+          <div class="leg"><div class="leg-dot" style="background:rgba(59,108,183,0.22)"></div>Part</div>
+          <div class="leg"><div class="leg-dot" style="background:rgba(255,255,255,0.07)"></div>Miss</div>
           <div class="leg"><div class="leg-dot" style="background:rgba(255,255,255,0.05)"></div>Ahead</div>
         </div>
       </div>
       <div class="card">
-        <div class="test-header">
-          <span class="label" style="margin:0">Phase self-test</span>
-          <button class="show-btn" onclick="toggleTest(this)">Show</button>
-        </div>
-        <div class="test-body" id="self-test"></div>
+        <span class="label" style="margin-bottom:10px;display:block">Roadmap</span>
+        <div id="roadmap"></div>
       </div>
     </div>
-    <div class="card">
-      <span class="label" style="margin-bottom:12px;display:block">Roadmap</span>
-      <div id="roadmap"></div>
+
+  </div>
+
+  <!-- Self-test: full width, collapsed -->
+  <div class="card d-test">
+    <div class="test-header">
+      <span class="label" style="margin:0">Phase self-test</span>
+      <button class="show-btn" onclick="toggleTest(this)">Show</button>
     </div>
+    <div class="test-body" id="self-test"></div>
   </div>
 
 </div>
@@ -220,7 +263,7 @@ function isoWeekKey(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate
 function currentPhase(wn){for(let i=0;i<PHASES.length;i++){const[s,e]=PHASES[i].weeks;if(wn>=s&&wn<=e)return{idx:i,...PHASES[i]};}return wn<1?{idx:0,...PHASES[0]}:{idx:PHASES.length-1,...PHASES[PHASES.length-1]};}
 function weekStatus(wn,data){if(wn<=0)return'future';const start=new Date(ARMY_START.getTime()+(wn-1)*7*24*60*60*1000);let total=0,done=0;for(let i=0;i<7;i++){const d=new Date(start.getTime()+i*24*60*60*1000);if(d>new Date())break;total++;const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const day=data.days[k];if(day&&(day.anki||day.read||day.exercises))done++;}if(total===0)return'future';if(done===total)return'full';if(done>0)return'partial';return'missed';}
 function daysUntil(s){const due=new Date(s+'T00:00:00'),now=new Date();now.setHours(0,0,0,0);return Math.round((due-now)/86400000);}
-function formatDue(s){return new Date(s+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}
+function formatDue(s){return new Date(s+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'});}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
 
 async function loadDeadlines(){
@@ -228,13 +271,15 @@ async function loadDeadlines(){
 }
 function renderDeadlines(deadlines){
   const el=document.getElementById('deadlines-list'),st=document.getElementById('dl-status');
-  const items=deadlines.map(d=>({...d,dl:daysUntil(d.due)})).filter(d=>d.dl>-30).sort((a,b)=>a.dl-b.dl).slice(0,6);
+  const isDesktop=window.innerWidth>=780;
+  const max=isDesktop?10:6;
+  const items=deadlines.map(d=>({...d,dl:daysUntil(d.due)})).filter(d=>d.dl>-30).sort((a,b)=>a.dl-b.dl).slice(0,max);
   if(!items.length){el.innerHTML='<div class="dl-empty">No upcoming deadlines.</div>';return;}
   const ov=items.filter(d=>d.dl<0).length;
   st.textContent=ov?`${ov} overdue`:`${items.length} upcoming`;
   if(ov)st.style.color='var(--red)';
   el.innerHTML=items.map(d=>{
-    const over=d.dl<0,badge=over?'overdue':(d.type||'math'),blabel=over?'Overdue':d.type==='reillum'?'Reillum':'Math';
+    const over=d.dl<0,badge=over?'overdue':(d.type||'math'),blabel=over?'Overdue':d.type==='reillum'?'Rei':'Math';
     let dc='ok',dl='';
     if(over){dc='past';dl=Math.abs(d.dl)+'d ago';}
     else if(d.dl===0){dc='urgent';dl='Today';}
