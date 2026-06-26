@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Math Prep</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0c1d38;
+  --surface: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.09);
+  --primary: #3b6cb7;
+  --primary-dim: rgba(59,108,183,0.22);
+  --accent: #e8a838;
+  --accent-dim: rgba(232,168,56,0.18);
+  --text: #f0f4ff;
+  --muted: rgba(240,244,255,0.38);
+  --red: #e05555;
+  --red-dim: rgba(224,85,85,0.18);
+  --green: #3db87a;
+  --mono: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100dvh; padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
+.wrap { max-width: 480px; margin: 0 auto; padding: 20px 16px 80px; }
+.header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.logo { width: 30px; height: 30px; border-radius: 8px; background: #0f2952; border: 1px solid rgba(59,108,183,0.35); display: flex; align-items: center; justify-content: center; font-style: italic; font-family: Georgia, serif; color: var(--primary); font-size: 15px; font-weight: 700; }
+.header-label { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.label { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); display: block; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 18px; margin-bottom: 10px; }
+.week-row { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 10px; }
+.phase-name { font-size: 21px; font-weight: 700; line-height: 1.2; }
+.phase-sub { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+.days-box { text-align: right; }
+.days-num { font-size: 32px; font-weight: 800; color: var(--primary); line-height: 1; }
+.days-lbl { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .15em; color: var(--muted); margin-top: 2px; }
+.today-lbl { margin-bottom: 12px; }
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.pillar-btn { display: flex; flex-direction: column; align-items: center; gap: 7px; padding: 14px 6px; border-radius: 14px; border: 1px solid var(--border); background: rgba(255,255,255,0.02); cursor: pointer; transition: all .15s; -webkit-tap-highlight-color: transparent; color: var(--muted); font-family: var(--mono); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; outline: none; }
+.pillar-btn:active { transform: scale(.93); }
+.pillar-btn.done { background: var(--primary-dim); border-color: rgba(59,108,183,0.45); color: var(--primary); }
+.pillar-icon { font-size: 20px; line-height: 1; }
+.all-done-msg { text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--green); margin-top: 10px; }
+.goal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.goal-text { font-size: 14px; color: rgba(240,244,255,0.75); line-height: 1.6; cursor: pointer; }
+.goal-ph { font-size: 14px; color: var(--muted); font-style: italic; cursor: pointer; }
+.edit-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--muted); border-radius: 10px; padding: 4px 10px; font-size: 11px; cursor: pointer; }
+textarea { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; padding: 10px 12px; color: var(--text); font-size: 14px; font-family: var(--sans); resize: none; outline: none; line-height: 1.6; }
+textarea:focus { border-color: rgba(59,108,183,0.5); }
+.goal-actions { display: flex; gap: 8px; margin-top: 8px; }
+.save-btn { background: var(--primary); color: white; border: none; border-radius: 10px; padding: 8px 18px; font-size: 12px; font-weight: 600; cursor: pointer; }
+.cancel-btn { background: none; border: none; color: var(--muted); font-size: 12px; cursor: pointer; padding: 8px; }
+.deadline-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.deadline-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deadline-item:first-child { padding-top: 0; }
+.dl-badge { flex-shrink: 0; min-width: 46px; padding: 3px 7px; border-radius: 7px; font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .12em; text-align: center; font-weight: 600; }
+.dl-badge.math    { background: var(--primary-dim); color: var(--primary); }
+.dl-badge.reillum { background: var(--accent-dim);  color: var(--accent);  }
+.dl-badge.overdue { background: var(--red-dim);     color: var(--red);     }
+.dl-content { flex: 1; min-width: 0; }
+.dl-label { font-size: 13px; font-weight: 600; line-height: 1.3; }
+.dl-desc { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+.dl-right { flex-shrink: 0; text-align: right; }
+.dl-days { font-family: var(--mono); font-size: 10px; font-weight: 700; }
+.dl-days.urgent { color: var(--red); }
+.dl-days.soon   { color: var(--accent); }
+.dl-days.ok     { color: var(--green); }
+.dl-days.past   { color: var(--muted); }
+.dl-date { font-family: var(--mono); font-size: 9px; color: var(--muted); margin-top: 2px; }
+.dl-empty { font-size: 13px; color: var(--muted); font-style: italic; padding: 4px 0; }
+.test-header { display: flex; justify-content: space-between; align-items: center; }
+.show-btn { background: none; border: none; color: var(--primary); font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .15em; cursor: pointer; }
+.test-body { font-size: 13px; color: rgba(240,244,255,0.65); line-height: 1.75; margin-top: 10px; white-space: pre-line; display: none; }
+.test-body.on { display: block; }
+.week-grid { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.wdot { width: 13px; height: 13px; border-radius: 3px; }
+.wdot.future  { background: rgba(255,255,255,0.05); }
+.wdot.current { background: var(--primary); box-shadow: 0 0 0 2px rgba(59,108,183,0.3); }
+.wdot.full    { background: rgba(59,108,183,0.55); }
+.wdot.partial { background: rgba(59,108,183,0.22); }
+.wdot.missed  { background: rgba(255,255,255,0.07); }
+.legend { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+.leg { display: flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.leg-dot { width: 9px; height: 9px; border-radius: 2px; }
+.rm-item { display: flex; gap: 10px; margin-bottom: 12px; }
+.rm-item:last-child { margin-bottom: 0; }
+.rm-dot-col { display: flex; flex-direction: column; align-items: center; padding-top: 2px; }
+.rm-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 8px; }
+.rm-dot.past   { background: rgba(59,108,183,0.4); border-color: rgba(59,108,183,0.6); }
+.rm-dot.active { background: var(--primary); border-color: var(--primary); }
+.rm-dot.active::after { content:''; width:5px; height:5px; border-radius:50%; background:white; display:block; }
+.rm-line { width: 1px; flex: 1; background: var(--border); margin-top: 4px; }
+.rm-item:last-child .rm-line { display: none; }
+.rm-name { font-size: 13px; font-weight: 600; }
+.rm-name.dim { color: rgba(240,244,255,0.32); }
+.rm-wks { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-left: 7px; }
+.rm-sub { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="logo">T</div>
+    <span class="header-label">Math Prep · Theo</span>
+  </div>
+
+  <div class="card">
+    <span class="label" id="week-label">—</span>
+    <div class="week-row">
+      <div style="flex:1;min-width:0">
+        <div class="phase-name" id="phase-name">—</div>
+        <div class="phase-sub" id="phase-sub"></div>
+      </div>
+      <div class="days-box">
+        <div class="days-num" id="days-num">0</div>
+        <div class="days-lbl">days logged</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="label today-lbl" id="today-lbl">Today</span>
+    <div class="pillars">
+      <button class="pillar-btn" id="btn-anki"      onclick="toggle('anki')"><span class="pillar-icon" id="ic-anki">🧠</span>Anki</button>
+      <button class="pillar-btn" id="btn-read"      onclick="toggle('read')"><span class="pillar-icon" id="ic-read">📖</span>Read</button>
+      <button class="pillar-btn" id="btn-exercises" onclick="toggle('exercises')"><span class="pillar-icon" id="ic-ex">✏️</span>Work</button>
+    </div>
+    <div class="all-done-msg" id="all-done" style="display:none">All three done · Good work</div>
+  </div>
+
+  <div class="card">
+    <div class="goal-header">
+      <span class="label" style="margin:0">This week's goal</span>
+      <button class="edit-btn" onclick="startEdit()">Edit</button>
+    </div>
+    <div id="goal-display" onclick="startEdit()"></div>
+    <div id="goal-editor" style="display:none">
+      <textarea id="goal-input" rows="3" placeholder="Set your goal for this week…"></textarea>
+      <div class="goal-actions">
+        <button class="save-btn" onclick="saveGoal()">Save</button>
+        <button class="cancel-btn" onclick="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="goal-header" style="margin-bottom:10px">
+      <span class="label" style="margin:0">Upcoming</span>
+      <span id="dl-status" style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em"></span>
+    </div>
+    <div id="deadlines-list"><div class="dl-empty">Loading…</div></div>
+  </div>
+
+  <div class="card">
+    <div class="test-header">
+      <span class="label" style="margin:0">Phase self-test</span>
+      <button class="show-btn" onclick="toggleTest(this)">Show</button>
+    </div>
+    <div class="test-body" id="self-test"></div>
+  </div>
+
+  <div class="card">
+    <span class="label">Army progress · 43 weeks</span>
+    <div class="week-grid" id="week-grid"></div>
+    <div class="legend">
+      <div class="leg"><div class="leg-dot" style="background:rgba(59,108,183,0.55)"></div>Complete</div>
+      <div class="leg"><div class="leg-dot" style="background:rgba(59,108,183,0.22)"></div>Partial</div>
+      <div class="leg"><div class="leg-dot" style="background:rgba(255,255,255,0.07)"></div>Missed</div>
+      <div class="leg"><div class="leg-dot" style="background:rgba(255,255,255,0.05)"></div>Ahead</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="label" style="margin-bottom:12px;display:block">Roadmap</span>
+    <div id="roadmap"></div>
+  </div>
+
+</div>
+<script>
+const ARMY_START=new Date('2026-06-29T00:00:00'),TOTAL_WEEKS=43,KEY='math_prep_v2';
+const PHASES=[
+  {weeks:[1,8],  name:'Epsilon-Delta',           sub:'Abbott Ch. 1–4 · Real numbers, limits, continuity'},
+  {weeks:[9,16], name:'Linear Algebra',           sub:'Axler Ch. 1–3 · Vector spaces, linear maps, bases'},
+  {weeks:[17,24],name:'Sequences & Series',       sub:'Abbott Ch. 2–3, 6 · Cauchy, Bolzano-Weierstrass'},
+  {weeks:[25,32],name:'Derivatives & Integration',sub:'Abbott Ch. 5–7 · MVT, Riemann, FTA'},
+  {weeks:[33,43],name:'Problem-Solving Sprint',   sub:'Past Unige exams · Timed, cold, no notes'},
+];
+const TESTS=[
+  'Prove ε-δ: lim_{x→2}(3x+1) = 7.\nAlso: if f is continuous and f(a) > 0, prove ∃δ > 0 such that f(x) > 0 on (a−δ, a+δ).',
+  'State all 8 vector space axioms from memory.\nProve the rank-nullity theorem.',
+  'Prove Bolzano-Weierstrass.\nShow ℚ is dense in ℝ.',
+  'State and prove the Fundamental Theorem of Analysis.',
+  'Complete a past Unige year-1 exam — timed, blind, no notes.',
+];
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{days:{},weeklyGoals:{}};}catch{return{days:{},weeklyGoals:{}};}}
+function save(d){localStorage.setItem(KEY,JSON.stringify(d));}
+function todayKey(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function weekNum(){const ms=new Date()-ARMY_START;if(ms<0)return 0;return Math.min(Math.floor(ms/(7*24*60*60*1000))+1,TOTAL_WEEKS);}
+function isoWeekKey(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+3-((d.getDay()+6)%7));const w1=new Date(d.getFullYear(),0,4);return`${d.getFullYear()}-W${String(1+Math.round(((d-w1)/86400000-3+((w1.getDay()+6)%7))/7)).padStart(2,'0')}`;}
+function currentPhase(wn){for(let i=0;i<PHASES.length;i++){const[s,e]=PHASES[i].weeks;if(wn>=s&&wn<=e)return{idx:i,...PHASES[i]};}return wn<1?{idx:0,...PHASES[0]}:{idx:PHASES.length-1,...PHASES[PHASES.length-1]};}
+function weekStatus(wn,data){if(wn<=0)return'future';const start=new Date(ARMY_START.getTime()+(wn-1)*7*24*60*60*1000);let total=0,done=0;for(let i=0;i<7;i++){const d=new Date(start.getTime()+i*24*60*60*1000);if(d>new Date())break;total++;const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const day=data.days[k];if(day&&(day.anki||day.read||day.exercises))done++;}if(total===0)return'future';if(done===total)return'full';if(done>0)return'partial';return'missed';}
+function daysUntil(s){const due=new Date(s+'T00:00:00'),now=new Date();now.setHours(0,0,0,0);return Math.round((due-now)/86400000);}
+function formatDue(s){return new Date(s+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+
+async function loadDeadlines(){
+  try{const r=await fetch('./deadlines.json?_='+Date.now());return(await r.json()).deadlines||[];}catch{return[];}
+}
+function renderDeadlines(deadlines){
+  const el=document.getElementById('deadlines-list'),st=document.getElementById('dl-status');
+  const items=deadlines.map(d=>({...d,dl:daysUntil(d.due)})).filter(d=>d.dl>-30).sort((a,b)=>a.dl-b.dl).slice(0,6);
+  if(!items.length){el.innerHTML='<div class="dl-empty">No upcoming deadlines.</div>';return;}
+  const ov=items.filter(d=>d.dl<0).length;
+  st.textContent=ov?`${ov} overdue`:`${items.length} upcoming`;
+  if(ov)st.style.color='var(--red)';
+  el.innerHTML=items.map(d=>{
+    const over=d.dl<0,badge=over?'overdue':(d.type||'math'),blabel=over?'Overdue':d.type==='reillum'?'Reillum':'Math';
+    let dc='ok',dl='';
+    if(over){dc='past';dl=Math.abs(d.dl)+'d ago';}
+    else if(d.dl===0){dc='urgent';dl='Today';}
+    else if(d.dl<=7){dc='urgent';dl=d.dl+'d';}
+    else if(d.dl<=21){dc='soon';dl=d.dl+'d';}
+    else{dc='ok';dl=d.dl+'d';}
+    return`<div class="deadline-item"><div class="dl-badge ${badge}">${blabel}</div><div class="dl-content"><div class="dl-label">${esc(d.label)}</div>${d.desc?`<div class="dl-desc">${esc(d.desc)}</div>`:''}</div><div class="dl-right"><div class="dl-days ${dc}">${dl}</div><div class="dl-date">${formatDue(d.due)}</div></div></div>`;
+  }).join('');
+}
+
+function render(){
+  const data=load(),wn=weekNum(),phase=currentPhase(wn),tk=todayKey(),wk=isoWeekKey();
+  const today=data.days[tk]||{anki:false,read:false,exercises:false},goal=data.weeklyGoals[wk]||'';
+  document.getElementById('week-label').textContent=wn>0?`Week ${wn} / ${TOTAL_WEEKS}`:`Starting in ${Math.ceil((ARMY_START-new Date())/86400000)} days`;
+  document.getElementById('phase-name').textContent=phase.name;
+  document.getElementById('phase-sub').textContent=phase.sub;
+  const dl=Object.keys(data.days).filter(k=>{const d=data.days[k];return d.anki||d.read||d.exercises;}).length;
+  document.getElementById('days-num').textContent=dl;
+  const d=new Date();
+  document.getElementById('today-lbl').textContent='Today · '+d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+  ['anki','read','exercises'].forEach(f=>{
+    const btn=document.getElementById(`btn-${f}`),ic=document.getElementById(f==='exercises'?'ic-ex':`ic-${f}`),done=today[f];
+    btn.className='pillar-btn'+(done?' done':'');
+    ic.textContent=done?'✅':(f==='anki'?'🧠':f==='read'?'📖':'✏️');
+  });
+  document.getElementById('all-done').style.display=(today.anki&&today.read&&today.exercises)?'block':'none';
+  const gd=document.getElementById('goal-display');
+  gd.innerHTML=goal?`<div class="goal-text">${esc(goal)}</div>`:`<div class="goal-ph">Tap to set a goal for this week…</div>`;
+  document.getElementById('self-test').textContent=TESTS[phase.idx];
+  const grid=document.getElementById('week-grid');grid.innerHTML='';
+  for(let w=1;w<=TOTAL_WEEKS;w++){const dot=document.createElement('div');dot.className=`wdot ${w>wn?'future':w===wn?'current':weekStatus(w,data)}`;dot.title=`Week ${w}`;grid.appendChild(dot);}
+  const rm=document.getElementById('roadmap');rm.innerHTML='';
+  PHASES.forEach((p,i)=>{
+    const isA=phase.idx===i,isP=phase.idx>i,div=document.createElement('div');div.className='rm-item';
+    div.innerHTML=`<div class="rm-dot-col"><div class="rm-dot ${isP?'past':isA?'active':''}">${isP?'✓':''}</div><div class="rm-line"></div></div><div style="flex:1;padding-top:1px"><div style="display:flex;align-items:baseline;flex-wrap:wrap"><span class="rm-name ${!isA&&!isP?'dim':''}">${p.name}</span><span class="rm-wks">Wk ${p.weeks[0]}–${p.weeks[1]}</span></div>${isA?`<div class="rm-sub">${p.sub}</div>`:''}</div>`;
+    rm.appendChild(div);
+  });
+}
+function toggle(f){const data=load(),tk=todayKey(),today=data.days[tk]||{anki:false,read:false,exercises:false};data.days[tk]={...today,[f]:!today[f]};save(data);render();}
+function startEdit(){document.getElementById('goal-input').value=(load().weeklyGoals[isoWeekKey()]||'');document.getElementById('goal-display').style.display='none';document.getElementById('goal-editor').style.display='block';document.querySelector('.edit-btn').style.display='none';document.getElementById('goal-input').focus();}
+function saveGoal(){const data=load();data.weeklyGoals[isoWeekKey()]=document.getElementById('goal-input').value.trim();save(data);cancelEdit();render();}
+function cancelEdit(){document.getElementById('goal-display').style.display='block';document.getElementById('goal-editor').style.display='none';document.querySelector('.edit-btn').style.display='block';}
+function toggleTest(btn){const el=document.getElementById('self-test');btn.textContent=el.classList.toggle('on')?'Hide':'Show';}
+render();
+loadDeadlines().then(renderDeadlines);
+</script>
+</body>
+</html>

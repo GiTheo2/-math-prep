@@ -1,0 +1,102 @@
+{
+  "deadlines": [
+    {
+      "id": "m-ch1",
+      "type": "math",
+      "label": "Abbott Ch. 1 done",
+      "desc": "The Real Numbers — completeness axiom, sup/inf, Archimedean property",
+      "due": "2026-07-13"
+    },
+    {
+      "id": "m-ch2",
+      "type": "math",
+      "label": "Abbott Ch. 2 done",
+      "desc": "Sequences and Series — ε-N definition, monotone convergence, Bolzano-Weierstrass",
+      "due": "2026-07-27"
+    },
+    {
+      "id": "m-ch3",
+      "type": "math",
+      "label": "Abbott Ch. 3 done",
+      "desc": "Basic Topology of ℝ — open/closed sets, compactness, connectedness",
+      "due": "2026-08-10"
+    },
+    {
+      "id": "m-ch4",
+      "type": "math",
+      "label": "Abbott Ch. 4 done + self-test",
+      "desc": "Functional Limits & Continuity — ε-δ mastered. Self-test: prove lim_{x→2}(3x+1)=7 and the neighbourhood theorem for f(a)>0.",
+      "due": "2026-08-24"
+    },
+    {
+      "id": "m-axler1",
+      "type": "math",
+      "label": "Axler Ch. 1 done",
+      "desc": "Vector Spaces — all 8 axioms, subspaces, span",
+      "due": "2026-09-07"
+    },
+    {
+      "id": "m-axler2",
+      "type": "math",
+      "label": "Axler Ch. 2 done",
+      "desc": "Finite-Dimensional Vector Spaces — linear independence, bases, dimension",
+      "due": "2026-09-21"
+    },
+    {
+      "id": "m-axler3",
+      "type": "math",
+      "label": "Axler Ch. 3 done + self-test",
+      "desc": "Linear Maps — kernel, image, rank-nullity theorem. Self-test: prove rank-nullity from scratch.",
+      "due": "2026-10-19"
+    },
+    {
+      "id": "m-ch23b",
+      "type": "math",
+      "label": "Abbott Ch. 2–3 revisited",
+      "desc": "Cauchy sequences, uniform continuity, connectedness proofs — deeper level",
+      "due": "2026-11-02"
+    },
+    {
+      "id": "m-ch6",
+      "type": "math",
+      "label": "Abbott Ch. 6 done + self-test",
+      "desc": "Sequences and Series of Functions — uniform convergence, power series. Self-test: prove Bolzano-Weierstrass, show ℚ dense in ℝ.",
+      "due": "2026-11-23"
+    },
+    {
+      "id": "m-ch5",
+      "type": "math",
+      "label": "Abbott Ch. 5 done",
+      "desc": "The Derivative — MVT, Taylor's theorem with remainder, L'Hôpital rigorous",
+      "due": "2026-12-28"
+    },
+    {
+      "id": "m-ch7",
+      "type": "math",
+      "label": "Abbott Ch. 7 done + self-test",
+      "desc": "The Riemann Integral — formal definition, integrability, FTA proof. Self-test: state and prove FTA.",
+      "due": "2027-02-01"
+    },
+    {
+      "id": "m-sprint",
+      "type": "math",
+      "label": "Problem-solving sprint begins",
+      "desc": "Start working past Unige Analysis I + Algèbre Linéaire I exams — timed, cold, no notes",
+      "due": "2027-02-15"
+    },
+    {
+      "id": "m-mock",
+      "type": "math",
+      "label": "Full mock exam",
+      "desc": "Complete a past Unige year-1 exam under real conditions. Self-assess honestly.",
+      "due": "2027-04-14"
+    },
+    {
+      "id": "m-army",
+      "type": "math",
+      "label": "Army ends",
+      "desc": "10 months done. Post-army intensive phase begins (May–Sept 2027).",
+      "due": "2027-04-29"
+    }
+  ]
+}
