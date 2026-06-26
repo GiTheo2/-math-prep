@@ -24,6 +24,17 @@
 }
 body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100dvh; padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
 .wrap { max-width: 480px; margin: 0 auto; padding: 20px 16px 80px; }
+
+@media (min-width: 780px) {
+  .wrap { max-width: 960px; padding: 32px 32px 60px; }
+  .desktop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .desktop-grid-3 { display: grid; grid-template-columns: 3fr 2fr; gap: 10px; }
+  .card { margin-bottom: 0; }
+  .phase-name { font-size: 28px; }
+  .days-num { font-size: 40px; }
+  .pillar-btn { padding: 20px 10px; }
+  .pillar-icon { font-size: 26px; }
+}
 .header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
 .logo { width: 30px; height: 30px; border-radius: 8px; background: #0f2952; border: 1px solid rgba(59,108,183,0.35); display: flex; align-items: center; justify-content: center; font-style: italic; font-family: Georgia, serif; color: var(--primary); font-size: 15px; font-weight: 700; }
 .header-label { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
@@ -106,7 +117,8 @@ textarea:focus { border-color: rgba(59,108,183,0.5); }
     <span class="header-label">Math Prep · Theo</span>
   </div>
 
-  <div class="card">
+  <!-- Phase — full width -->
+  <div class="card" style="margin-bottom:10px">
     <span class="label" id="week-label">—</span>
     <div class="week-row">
       <div style="flex:1;min-width:0">
@@ -120,61 +132,67 @@ textarea:focus { border-color: rgba(59,108,183,0.5); }
     </div>
   </div>
 
-  <div class="card">
-    <span class="label today-lbl" id="today-lbl">Today</span>
-    <div class="pillars">
-      <button class="pillar-btn" id="btn-anki"      onclick="toggle('anki')"><span class="pillar-icon" id="ic-anki">🧠</span>Anki</button>
-      <button class="pillar-btn" id="btn-read"      onclick="toggle('read')"><span class="pillar-icon" id="ic-read">📖</span>Read</button>
-      <button class="pillar-btn" id="btn-exercises" onclick="toggle('exercises')"><span class="pillar-icon" id="ic-ex">✏️</span>Work</button>
-    </div>
-    <div class="all-done-msg" id="all-done" style="display:none">All three done · Good work</div>
-  </div>
-
-  <div class="card">
-    <div class="goal-header">
-      <span class="label" style="margin:0">This week's goal</span>
-      <button class="edit-btn" onclick="startEdit()">Edit</button>
-    </div>
-    <div id="goal-display" onclick="startEdit()"></div>
-    <div id="goal-editor" style="display:none">
-      <textarea id="goal-input" rows="3" placeholder="Set your goal for this week…"></textarea>
-      <div class="goal-actions">
-        <button class="save-btn" onclick="saveGoal()">Save</button>
-        <button class="cancel-btn" onclick="cancelEdit()">Cancel</button>
+  <!-- Row 2: Today + Upcoming -->
+  <div class="desktop-grid" style="margin-bottom:10px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="card">
+        <span class="label today-lbl" id="today-lbl">Today</span>
+        <div class="pillars">
+          <button class="pillar-btn" id="btn-anki"      onclick="toggle('anki')"><span class="pillar-icon" id="ic-anki">🧠</span>Anki</button>
+          <button class="pillar-btn" id="btn-read"      onclick="toggle('read')"><span class="pillar-icon" id="ic-read">📖</span>Read</button>
+          <button class="pillar-btn" id="btn-exercises" onclick="toggle('exercises')"><span class="pillar-icon" id="ic-ex">✏️</span>Work</button>
+        </div>
+        <div class="all-done-msg" id="all-done" style="display:none">All three done · Good work</div>
+      </div>
+      <div class="card">
+        <div class="goal-header">
+          <span class="label" style="margin:0">This week's goal</span>
+          <button class="edit-btn" onclick="startEdit()">Edit</button>
+        </div>
+        <div id="goal-display" onclick="startEdit()"></div>
+        <div id="goal-editor" style="display:none">
+          <textarea id="goal-input" rows="3" placeholder="Set your goal for this week…"></textarea>
+          <div class="goal-actions">
+            <button class="save-btn" onclick="saveGoal()">Save</button>
+            <button class="cancel-btn" onclick="cancelEdit()">Cancel</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="card">
-    <div class="goal-header" style="margin-bottom:10px">
-      <span class="label" style="margin:0">Upcoming</span>
-      <span id="dl-status" style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em"></span>
-    </div>
-    <div id="deadlines-list"><div class="dl-empty">Loading…</div></div>
-  </div>
-
-  <div class="card">
-    <div class="test-header">
-      <span class="label" style="margin:0">Phase self-test</span>
-      <button class="show-btn" onclick="toggleTest(this)">Show</button>
-    </div>
-    <div class="test-body" id="self-test"></div>
-  </div>
-
-  <div class="card">
-    <span class="label">Army progress · 43 weeks</span>
-    <div class="week-grid" id="week-grid"></div>
-    <div class="legend">
-      <div class="leg"><div class="leg-dot" style="background:rgba(59,108,183,0.55)"></div>Complete</div>
-      <div class="leg"><div class="leg-dot" style="background:rgba(59,108,183,0.22)"></div>Partial</div>
-      <div class="leg"><div class="leg-dot" style="background:rgba(255,255,255,0.07)"></div>Missed</div>
-      <div class="leg"><div class="leg-dot" style="background:rgba(255,255,255,0.05)"></div>Ahead</div>
+    <div class="card">
+      <div class="goal-header" style="margin-bottom:10px">
+        <span class="label" style="margin:0">Upcoming</span>
+        <span id="dl-status" style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em"></span>
+      </div>
+      <div id="deadlines-list"><div class="dl-empty">Loading…</div></div>
     </div>
   </div>
 
-  <div class="card">
-    <span class="label" style="margin-bottom:12px;display:block">Roadmap</span>
-    <div id="roadmap"></div>
+  <!-- Row 3: Progress + Roadmap -->
+  <div class="desktop-grid-3" style="margin-bottom:10px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="card">
+        <span class="label">Army progress · 43 weeks</span>
+        <div class="week-grid" id="week-grid"></div>
+        <div class="legend">
+          <div class="leg"><div class="leg-dot" style="background:rgba(59,108,183,0.55)"></div>Complete</div>
+          <div class="leg"><div class="leg-dot" style="background:rgba(59,108,183,0.22)"></div>Partial</div>
+          <div class="leg"><div class="leg-dot" style="background:rgba(255,255,255,0.07)"></div>Missed</div>
+          <div class="leg"><div class="leg-dot" style="background:rgba(255,255,255,0.05)"></div>Ahead</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="test-header">
+          <span class="label" style="margin:0">Phase self-test</span>
+          <button class="show-btn" onclick="toggleTest(this)">Show</button>
+        </div>
+        <div class="test-body" id="self-test"></div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="label" style="margin-bottom:12px;display:block">Roadmap</span>
+      <div id="roadmap"></div>
+    </div>
   </div>
 
 </div>
