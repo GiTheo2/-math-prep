@@ -66,19 +66,27 @@ def anki_available():
 
 def push_to_anki(cards, deck, tags):
     anki_request("createDeck", deck=deck)
-    notes = [
-        {
+    added, dupes = 0, 0
+    for front, back in cards:
+        note = {
             "deckName": deck,
             "modelName": "Basic",
             "fields": {"Front": front, "Back": back},
             "options": {"allowDuplicate": False},
             "tags": tags,
         }
-        for front, back in cards
-    ]
-    results = anki_request("addNotes", notes=notes)
-    added = sum(1 for r in results if r is not None)
-    return added, len(results) - added
+        try:
+            result = anki_request("addNote", note=note)
+            if result:
+                added += 1
+            else:
+                dupes += 1
+        except Exception as e:
+            if "duplicate" in str(e).lower():
+                dupes += 1
+            else:
+                raise
+    return added, dupes
 
 
 def save_csv(cards, topic):
