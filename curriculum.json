@@ -1,0 +1,198 @@
+{
+  "chapters": [
+    {
+      "id": "abbott-1",
+      "book": "Abbott - Understanding Analysis",
+      "chapter": 1,
+      "title": "The Real Numbers",
+      "deck": "Mathematics::02 - Real Analysis",
+      "concepts": [
+        { "id": "field-axioms", "label": "Field axioms of ℝ (addition and multiplication)", "status": "pending" },
+        { "id": "order-axioms", "label": "Order axioms and the ordered field structure of ℝ", "status": "pending" },
+        { "id": "completeness-axiom", "label": "Axiom of Completeness — statement and why ℚ fails it", "status": "pending" },
+        { "id": "upper-lower-bound", "label": "Upper bound, lower bound, bounded above/below — definitions", "status": "pending" },
+        { "id": "sup-inf-def", "label": "Supremum (least upper bound) and infimum (greatest lower bound) — formal definitions", "status": "pending" },
+        { "id": "sup-inf-epsilon", "label": "Epsilon characterisation of supremum: s = sup A iff s is an upper bound and ∀ε>0 ∃a∈A with a > s−ε", "status": "pending" },
+        { "id": "archimedean", "label": "Archimedean Property — statement and proof sketch", "status": "pending" },
+        { "id": "density-rationals", "label": "Density of ℚ in ℝ — statement and proof", "status": "pending" },
+        { "id": "nested-intervals", "label": "Nested Interval Property — statement and proof", "status": "pending" },
+        { "id": "absolute-value", "label": "Absolute value — definition and triangle inequality |a+b| ≤ |a|+|b|", "status": "pending" }
+      ]
+    },
+    {
+      "id": "abbott-2",
+      "book": "Abbott - Understanding Analysis",
+      "chapter": 2,
+      "title": "Sequences and Series",
+      "deck": "Mathematics::02 - Real Analysis",
+      "concepts": [
+        { "id": "sequence-def", "label": "Definition of a sequence; what it means for (aₙ) to converge to L (ε-N definition)", "status": "pending" },
+        { "id": "limit-uniqueness", "label": "Uniqueness of limits — proof", "status": "pending" },
+        { "id": "convergent-bounded", "label": "Convergent sequences are bounded — proof", "status": "pending" },
+        { "id": "algebraic-limit", "label": "Algebraic Limit Theorem for sequences (sum, product, quotient)", "status": "pending" },
+        { "id": "order-limit", "label": "Order Limit Theorem — if aₙ ≤ bₙ then lim aₙ ≤ lim bₙ", "status": "pending" },
+        { "id": "squeeze-theorem", "label": "Squeeze Theorem for sequences", "status": "pending" },
+        { "id": "monotone-convergence", "label": "Monotone Convergence Theorem — bounded monotone sequences converge", "status": "pending" },
+        { "id": "subsequences", "label": "Subsequences — definition; subsequences of a convergent sequence converge to the same limit", "status": "pending" },
+        { "id": "bolzano-weierstrass", "label": "Bolzano-Weierstrass Theorem — every bounded sequence has a convergent subsequence (statement + proof)", "status": "pending" },
+        { "id": "cauchy-def", "label": "Cauchy sequence — formal definition", "status": "pending" },
+        { "id": "cauchy-criterion", "label": "Cauchy Criterion — a sequence converges iff it is Cauchy (proof both directions)", "status": "pending" },
+        { "id": "series-def", "label": "Series — definition via partial sums; convergence of a series", "status": "pending" },
+        { "id": "cauchy-series", "label": "Cauchy criterion for series convergence", "status": "pending" },
+        { "id": "absolute-convergence", "label": "Absolute convergence implies convergence (and the converse fails)", "status": "pending" },
+        { "id": "geometric-series", "label": "Geometric series — when it converges and its sum", "status": "pending" }
+      ]
+    },
+    {
+      "id": "abbott-3",
+      "book": "Abbott - Understanding Analysis",
+      "chapter": 3,
+      "title": "Basic Topology of ℝ",
+      "deck": "Mathematics::02 - Real Analysis",
+      "concepts": [
+        { "id": "open-set-def", "label": "Open set — formal definition (every point is interior)", "status": "pending" },
+        { "id": "closed-set-def", "label": "Closed set — definition as complement of open; equivalently contains all limit points", "status": "pending" },
+        { "id": "open-set-properties", "label": "Arbitrary union of open sets is open; finite intersection of open sets is open", "status": "pending" },
+        { "id": "limit-point-def", "label": "Limit point (accumulation point) — formal definition", "status": "pending" },
+        { "id": "closure-def", "label": "Closure of a set — definition and characterisation", "status": "pending" },
+        { "id": "compact-def", "label": "Compact set — definition via open covers (every open cover has a finite subcover)", "status": "pending" },
+        { "id": "heine-borel", "label": "Heine-Borel Theorem — compact ↔ closed and bounded in ℝ (proof)", "status": "pending" },
+        { "id": "compact-sequence", "label": "Sequential compactness — a set is compact iff every sequence has a convergent subsequence in the set", "status": "pending" },
+        { "id": "perfect-set", "label": "Perfect set — closed set with no isolated points; example: Cantor set", "status": "pending" },
+        { "id": "connected-def", "label": "Connected set — definition (not the union of two disjoint non-empty open sets)", "status": "pending" },
+        { "id": "connected-intervals", "label": "Connected subsets of ℝ are exactly the intervals — proof", "status": "pending" }
+      ]
+    },
+    {
+      "id": "abbott-4",
+      "book": "Abbott - Understanding Analysis",
+      "chapter": 4,
+      "title": "Functional Limits and Continuity",
+      "deck": "Mathematics::02 - Real Analysis",
+      "concepts": [
+        { "id": "functional-limit-def", "label": "Functional limit — ε-δ definition of lim_{x→c} f(x) = L", "status": "pending" },
+        { "id": "sequential-characterisation", "label": "Sequential characterisation of functional limits — lim f(x) = L iff f(xₙ) → L for every xₙ → c", "status": "pending" },
+        { "id": "algebraic-limit-functions", "label": "Algebraic Limit Theorem for functions", "status": "pending" },
+        { "id": "continuity-def", "label": "Continuity at a point — ε-δ definition; three equivalent formulations", "status": "pending" },
+        { "id": "continuity-composition", "label": "Composition of continuous functions is continuous", "status": "pending" },
+        { "id": "extreme-value-theorem", "label": "Extreme Value Theorem — continuous function on compact set attains its max and min (proof)", "status": "pending" },
+        { "id": "intermediate-value-theorem", "label": "Intermediate Value Theorem — statement and proof", "status": "pending" },
+        { "id": "uniform-continuity-def", "label": "Uniform continuity — definition and difference from pointwise continuity", "status": "pending" },
+        { "id": "uniform-cont-compact", "label": "Continuous function on a compact set is uniformly continuous — proof", "status": "pending" },
+        { "id": "discontinuity-types", "label": "Types of discontinuity — removable, jump, essential; examples", "status": "pending" }
+      ]
+    },
+    {
+      "id": "abbott-5",
+      "book": "Abbott - Understanding Analysis",
+      "chapter": 5,
+      "title": "The Derivative",
+      "deck": "Mathematics::05 - Calculus (Rigorous)",
+      "concepts": [
+        { "id": "derivative-def", "label": "Derivative — formal definition as a limit; differentiability at a point", "status": "pending" },
+        { "id": "differentiable-continuous", "label": "Differentiable implies continuous — proof; converse fails (|x| at 0)", "status": "pending" },
+        { "id": "algebraic-differentiation", "label": "Algebraic differentiation rules — sum, product, quotient (proofs from definition)", "status": "pending" },
+        { "id": "chain-rule", "label": "Chain rule — statement and proof", "status": "pending" },
+        { "id": "interior-extremum", "label": "Interior Extremum Theorem — if f has local max/min at c interior, then f′(c) = 0", "status": "pending" },
+        { "id": "rolles-theorem", "label": "Rolle's Theorem — statement and proof", "status": "pending" },
+        { "id": "mvt", "label": "Mean Value Theorem — statement, proof, and key applications", "status": "pending" },
+        { "id": "mvt-applications", "label": "MVT applications: f′ > 0 implies increasing; f′ = 0 implies constant", "status": "pending" },
+        { "id": "lhopital", "label": "L'Hôpital's Rule — rigorous statement, conditions, proof sketch", "status": "pending" },
+        { "id": "taylor-theorem", "label": "Taylor's Theorem with Lagrange remainder — statement and proof", "status": "pending" }
+      ]
+    },
+    {
+      "id": "abbott-6",
+      "book": "Abbott - Understanding Analysis",
+      "chapter": 6,
+      "title": "Sequences and Series of Functions",
+      "deck": "Mathematics::02 - Real Analysis",
+      "concepts": [
+        { "id": "pointwise-convergence", "label": "Pointwise convergence of a sequence of functions — definition", "status": "pending" },
+        { "id": "uniform-convergence-def", "label": "Uniform convergence — definition and comparison with pointwise", "status": "pending" },
+        { "id": "cauchy-criterion-functions", "label": "Cauchy criterion for uniform convergence of function sequences", "status": "pending" },
+        { "id": "uniform-limit-continuous", "label": "Uniform limit of continuous functions is continuous — proof", "status": "pending" },
+        { "id": "uniform-limit-integrable", "label": "Uniform convergence allows interchange of limit and integral", "status": "pending" },
+        { "id": "power-series-def", "label": "Power series — definition, radius of convergence", "status": "pending" },
+        { "id": "radius-convergence", "label": "Radius of convergence — Cauchy-Hadamard formula; behaviour at endpoints", "status": "pending" },
+        { "id": "power-series-uniform", "label": "Power series converges uniformly inside its radius of convergence", "status": "pending" },
+        { "id": "differentiating-power-series", "label": "Power series can be differentiated term-by-term inside its radius of convergence", "status": "pending" }
+      ]
+    },
+    {
+      "id": "abbott-7",
+      "book": "Abbott - Understanding Analysis",
+      "chapter": 7,
+      "title": "The Riemann Integral",
+      "deck": "Mathematics::05 - Calculus (Rigorous)",
+      "concepts": [
+        { "id": "partition-def", "label": "Partition of [a,b]; upper and lower sums U(f,P) and L(f,P)", "status": "pending" },
+        { "id": "riemann-integral-def", "label": "Riemann integral — definition via sup of lower sums and inf of upper sums", "status": "pending" },
+        { "id": "riemann-criterion", "label": "Riemann integrability criterion — f integrable iff ∀ε>0 ∃P with U(f,P)−L(f,P) < ε", "status": "pending" },
+        { "id": "continuous-integrable", "label": "Continuous functions on [a,b] are Riemann integrable — proof", "status": "pending" },
+        { "id": "monotone-integrable", "label": "Monotone functions on [a,b] are Riemann integrable", "status": "pending" },
+        { "id": "integral-properties", "label": "Properties of the integral: linearity, monotonicity, additivity over intervals", "status": "pending" },
+        { "id": "fta-part1", "label": "Fundamental Theorem of Analysis Part 1 — if F(x) = ∫_a^x f(t)dt then F′(x) = f(x) (proof)", "status": "pending" },
+        { "id": "fta-part2", "label": "Fundamental Theorem of Analysis Part 2 — ∫_a^b f = F(b)−F(a) where F′ = f (proof)", "status": "pending" }
+      ]
+    },
+    {
+      "id": "axler-1",
+      "book": "Axler - Linear Algebra Done Right",
+      "chapter": 1,
+      "title": "Vector Spaces",
+      "deck": "Mathematics::03 - Linear Algebra",
+      "concepts": [
+        { "id": "vector-space-axioms", "label": "Vector space — all 8 axioms (4 for addition, 4 for scalar multiplication)", "status": "pending" },
+        { "id": "vector-space-examples", "label": "Examples of vector spaces: ℝⁿ, ℂⁿ, polynomials 𝒫(𝔽), F^∞, function spaces", "status": "pending" },
+        { "id": "vs-basic-properties", "label": "Basic properties from axioms: unique zero, unique additive inverse, 0·v = 0, (−1)v = −v", "status": "pending" },
+        { "id": "subspace-def", "label": "Subspace — definition and the three conditions to verify", "status": "pending" },
+        { "id": "subspace-examples", "label": "Subspace examples and non-examples in ℝ² and ℝ³", "status": "pending" },
+        { "id": "sum-subspaces", "label": "Sum of subspaces U + W — definition; why it is the smallest containing subspace", "status": "pending" },
+        { "id": "direct-sum-def", "label": "Direct sum U ⊕ W — definition and characterisation (unique decomposition)", "status": "pending" },
+        { "id": "direct-sum-criterion", "label": "Direct sum criterion: U + W is direct iff U ∩ W = {0}", "status": "pending" }
+      ]
+    },
+    {
+      "id": "axler-2",
+      "book": "Axler - Linear Algebra Done Right",
+      "chapter": 2,
+      "title": "Finite-Dimensional Vector Spaces",
+      "deck": "Mathematics::03 - Linear Algebra",
+      "concepts": [
+        { "id": "span-def", "label": "Span — definition; span is the smallest subspace containing the list", "status": "pending" },
+        { "id": "finite-dimensional-def", "label": "Finite-dimensional vs infinite-dimensional — definitions", "status": "pending" },
+        { "id": "linear-independence-def", "label": "Linear independence — formal definition; equivalent to no redundant vectors", "status": "pending" },
+        { "id": "linear-dependence-lemma", "label": "Linear Dependence Lemma — if linearly dependent, one vector is in span of the others (proof)", "status": "pending" },
+        { "id": "length-bound", "label": "Length of linearly independent list ≤ length of spanning list — proof", "status": "pending" },
+        { "id": "basis-def", "label": "Basis — definition; equivalent characterisations (spanning + independent; unique representation)", "status": "pending" },
+        { "id": "basis-existence", "label": "Every finite-dimensional vector space has a basis (proof)", "status": "pending" },
+        { "id": "basis-extension", "label": "Every linearly independent list extends to a basis; every spanning list reduces to a basis", "status": "pending" },
+        { "id": "dimension-def", "label": "Dimension — well-defined (all bases have the same length); proof", "status": "pending" },
+        { "id": "dimension-subspace", "label": "dim(U) ≤ dim(V) for subspace U of V; equality implies U = V", "status": "pending" },
+        { "id": "dimension-sum", "label": "dim(U + W) = dim U + dim W − dim(U ∩ W)", "status": "pending" }
+      ]
+    },
+    {
+      "id": "axler-3",
+      "book": "Axler - Linear Algebra Done Right",
+      "chapter": 3,
+      "title": "Linear Maps",
+      "deck": "Mathematics::03 - Linear Algebra",
+      "concepts": [
+        { "id": "linear-map-def", "label": "Linear map — definition (additivity + homogeneity)", "status": "pending" },
+        { "id": "linear-map-examples", "label": "Examples of linear maps: zero map, identity, differentiation, integration, matrix multiplication", "status": "pending" },
+        { "id": "linear-map-properties", "label": "Basic properties: T(0) = 0; T(au + bv) = aT(u) + bT(v)", "status": "pending" },
+        { "id": "null-space-def", "label": "Null space (kernel) of T — definition; null space is a subspace (proof)", "status": "pending" },
+        { "id": "range-def", "label": "Range (image) of T — definition; range is a subspace (proof)", "status": "pending" },
+        { "id": "injective-def", "label": "Injectivity — definition; T injective iff null T = {0} (proof)", "status": "pending" },
+        { "id": "surjective-def", "label": "Surjectivity — definition; T surjective iff range T = W", "status": "pending" },
+        { "id": "rank-nullity", "label": "Fundamental Theorem of Linear Maps (rank-nullity): dim null T + dim range T = dim V (proof)", "status": "pending" },
+        { "id": "rank-nullity-consequences", "label": "Consequences of rank-nullity: map to smaller space not injective; map to larger space not surjective", "status": "pending" },
+        { "id": "matrix-of-map", "label": "Matrix of a linear map with respect to bases — definition and construction", "status": "pending" },
+        { "id": "invertible-map", "label": "Invertible linear map — definition; invertible iff injective and surjective", "status": "pending" },
+        { "id": "isomorphism", "label": "Isomorphism — finite-dimensional spaces of equal dimension are isomorphic", "status": "pending" }
+      ]
+    }
+  ]
+}
