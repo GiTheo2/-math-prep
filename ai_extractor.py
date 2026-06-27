@@ -31,42 +31,44 @@ def extract_tasks(emails: list) -> list:
 
     prompt = f"""Today is {today}.
 
-Review these emails and extract ONLY the ones that require a specific action or contain a deadline.
+Your job is simple: find emails from REAL HUMANS writing directly to Theo. That is the only thing that matters.
 
-Include as action items:
-- Any real person replying to outreach or contact form (even if it's a "not interested")
-- Email delivery failures / bounces → action is to remove that email from the list
-- Upwork / freelance platform job notifications that match AI/automation work
-- Client or lead emails
-- Payment, invoice, or deadline emails
+EXTRACT only:
+- A real person replying to Theo's cold outreach (even "not interested" counts)
+- A real person who filled out the contact form on reillum.com
+- A real client or lead asking a question or following up
+- A real person requesting a call, proposal, or collaboration
 
-Ignore: newsletters, promotional offers, Google/platform security alerts (unless suspicious), receipts for known services, and purely informational automated reports.
+IGNORE everything else — no exceptions:
+- Upwork job alerts, LinkedIn notifications, job board emails
+- Delivery failures, bounce notifications
+- Newsletters, promotions, marketing
+- Google / platform security alerts
+- Any automated system email (no-reply, noreply, mailer-daemon, notifications@, alerts@, etc.)
 
-Return a JSON array. Each item must have exactly these fields:
+If the sender is a platform or automated system rather than a human being writing personally to Theo, ignore it.
+
+Return a JSON array. Each item:
 {{
   "id": "e-<number>",
-  "email_id": "<the message id from id= field>",
-  "thread_id": "<the thread id from thread= field>",
+  "email_id": "<message id from id= field>",
+  "thread_id": "<thread id from thread= field>",
   "type": "email",
-  "priority": "high" or "medium",
-  "label": "Short action verb + object, max 60 chars",
-  "desc": "One sentence explaining what needs doing and why",
+  "priority": "high",
+  "label": "REPLY to [name] — [one phrase about topic]",
+  "desc": "One sentence: who they are and what they want",
   "source": "personal" or "professional",
-  "due": "YYYY-MM-DD or null if no specific deadline",
-  "action_verb": "REPLY" | "SEND" | "CALL" | "REVIEW" | "SUBMIT" | "FOLLOW-UP" | "PAY" | "BOOK",
-  "needs_draft": true or false
+  "due": "{today}",
+  "action_verb": "REPLY",
+  "needs_draft": true
 }}
 
-Priority rules:
-- high = client/lead email, today's deadline, explicit "please respond by", payment, urgent tone
-- medium = deadline within 7 days, professional follow-up, anything time-sensitive but not critical
-
-needs_draft = true only when: action_verb is REPLY or FOLLOW-UP AND the email is from a real person (not an automated system or notification service).
+All real-person emails are high priority and due today. Theo has a 1-day max rule for responding to anyone who writes to him directly.
 
 Emails:
 {email_list}
 
-Respond with ONLY the JSON array, nothing else. If no action items, return []."""
+Respond with ONLY the JSON array, nothing else. If no real-person emails found, return []."""
 
     try:
         text = _call_claude(prompt)
