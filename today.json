@@ -1,27 +1,16 @@
 {
-  "generated": "2026-06-27T14:47:27.798386",
+  "generated": "2026-06-27T14:50:27.123672",
   "today": [
     {
       "id": "e-7",
       "type": "email",
       "priority": "high",
-      "label": "Follow-up on test lead inquiry",
-      "desc": "New lead submitted a form on 2026-06-26 and you committed to responding within 24 hours; follow-up needed by end of day 2026-06-27.",
+      "label": "Review new lead submission",
+      "desc": "New form submission received from test lead on 2026-06-26; requires follow-up within 24 hours as promised in auto-reply.",
       "source": "professional",
       "due": "2026-06-27",
-      "action_verb": "FOLLOW-UP",
-      "calendar_event_id": "1iubjluobu5ea8rrsogn3a5588"
-    },
-    {
-      "id": "e-61",
-      "type": "email",
-      "priority": "high",
-      "label": "Follow-up on test lead inquiry",
-      "desc": "New lead submitted a form on 2026-06-26 and you committed to responding within 24 hours; follow-up needed by end of day 2026-06-27.",
-      "source": "professional",
-      "due": "2026-06-27",
-      "action_verb": "FOLLOW-UP",
-      "calendar_event_id": "11mhj06hsso4c9reh0qpipj4mc"
+      "action_verb": "REVIEW",
+      "calendar_event_id": "r8d0nualeosu963e7e6ua21u24"
     }
   ],
   "upcoming": []
