@@ -20,8 +20,11 @@ import os
 import csv
 import json
 import datetime
+import subprocess
 import urllib.request
-import anthropic
+
+CLAUDE_BIN = '/Users/theodaude/.local/bin/claude'
+_ENV = {k: v for k, v in os.environ.items() if k != 'ANTHROPIC_API_KEY'}
 
 CURRICULUM_PATH = os.path.join(os.path.dirname(__file__), "curriculum.json")
 DEFAULT_DECK = "Mathematics::02 - Real Analysis"
@@ -33,7 +36,7 @@ Level: Swiss Maturité 4.5/6. Proof vocabulary is decent; epsilon-delta and abst
 
 Rules:
 - Every definition card must give the FORMAL definition, not an informal description
-- Use LaTeX: $ for inline, $$ for display
+- Use Anki MathJax notation ONLY: \\( ... \\) for inline math, \\[ ... \\] for display math. NEVER use $ or $$.
 - Cards must be atomic: one concept per card
 - Vary types: definition, theorem statement, proof technique, "why is this needed", counterexample
 - Answers must be complete and self-contained — no "see above"
@@ -103,18 +106,17 @@ def save_csv(cards, topic):
 
 
 def generate_cards(topic, n):
-    client = anthropic.Anthropic()
-    msg = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=4096,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content":
-            f'Generate {n} Anki flashcards on: "{topic}"\n'
-            f"Focus on definition-level and theorem-level cards for first-year university mathematics."
-        }],
+    prompt = (
+        f"{SYSTEM_PROMPT}\n\n"
+        f'Generate {n} Anki flashcards on: "{topic}"\n'
+        f"Focus on definition-level and theorem-level cards for first-year university mathematics."
+    )
+    result = subprocess.run(
+        [CLAUDE_BIN, '-p', '--output-format', 'text'],
+        input=prompt, capture_output=True, text=True, timeout=120, env=_ENV
     )
     cards = []
-    for line in msg.content[0].text.strip().splitlines():
+    for line in result.stdout.strip().splitlines():
         if " ||| " in line:
             front, back = line.split(" ||| ", 1)
             cards.append((front.strip(), back.strip()))
