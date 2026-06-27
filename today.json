@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-27T15:36:35.540913",
+  "generated": "2026-06-27T15:40:19.579889",
   "today": [
     {
       "id": "e-1",
@@ -7,12 +7,14 @@
       "thread_id": "19f06e5c1acb1b5c",
       "type": "email",
       "priority": "medium",
-      "label": "Review Upwork AI automation architect job",
-      "desc": "An Upwork job alert for an AI automation architect paid discovery/build matches your AI work and should be reviewed for a proposal.",
+      "label": "Submit proposal: AI automation architect job",
+      "desc": "Upwork posted an AI automation architect discovery/build job matching your alert\u2014review and submit a proposal before it fills.",
       "source": "professional",
       "due": null,
-      "action_verb": "REVIEW",
-      "needs_draft": false
+      "action_verb": "SUBMIT",
+      "needs_draft": false,
+      "calendar_event_id": "qi5ikh7j215o4n1tb253c922vk",
+      "gmail_link": "https://mail.google.com/mail/u/hello@reillum.com/#all/19f06e5c1acb1b5c"
     },
     {
       "id": "e-2",
@@ -20,12 +22,14 @@
       "thread_id": "19f06a4bfd556c0e",
       "type": "email",
       "priority": "medium",
-      "label": "Review Upwork Fix Zapier Automation job",
-      "desc": "An Upwork job alert for fixing a Zapier automation matches your automation work and should be reviewed for a proposal.",
+      "label": "Submit proposal: Fix Zapier automation job",
+      "desc": "Upwork posted a Zapier automation fix job ($30/hr) matching your automation skills\u2014review and submit a proposal.",
       "source": "professional",
       "due": null,
-      "action_verb": "REVIEW",
-      "needs_draft": false
+      "action_verb": "SUBMIT",
+      "needs_draft": false,
+      "calendar_event_id": "32m3mvfg77qb93mj5fqvebqfi8",
+      "gmail_link": "https://mail.google.com/mail/u/hello@reillum.com/#all/19f06a4bfd556c0e"
     },
     {
       "id": "e-3",
@@ -33,12 +37,14 @@
       "thread_id": "19f084b2b266dc8c",
       "type": "email",
       "priority": "medium",
-      "label": "Remove info@orlandopooltech.com from list",
-      "desc": "Outreach to Orlando Pool Tech bounced because the address could not be found, so remove it from the outreach list.",
+      "label": "Remove bounced email: orlandopooltech.com",
+      "desc": "Outreach to info@orlandopooltech.com bounced (address not found)\u2014remove this email from the contact list.",
       "source": "professional",
       "due": null,
       "action_verb": "REVIEW",
-      "needs_draft": false
+      "needs_draft": false,
+      "calendar_event_id": "5qpejpoetvraarbpi3srleajas",
+      "gmail_link": "https://mail.google.com/mail/u/hello@reillum.com/#all/19f084b2b266dc8c"
     },
     {
       "id": "e-4",
@@ -46,12 +52,14 @@
       "thread_id": "19f084b0bd933f8a",
       "type": "email",
       "priority": "medium",
-      "label": "Remove Perez Pool Cleaning email from list",
-      "desc": "Outreach to support@mg.perezpoolcleaning.com bounced because the domain could not be found, so remove it from the outreach list.",
+      "label": "Remove bounced email: perezpoolcleaning.com",
+      "desc": "Outreach to support@mg.perezpoolcleaning.com bounced (domain not found)\u2014remove this email from the contact list.",
       "source": "professional",
       "due": null,
       "action_verb": "REVIEW",
-      "needs_draft": false
+      "needs_draft": false,
+      "calendar_event_id": "j9p8vm4jec7gadie2f8vf68g2g",
+      "gmail_link": "https://mail.google.com/mail/u/hello@reillum.com/#all/19f084b0bd933f8a"
     }
   ],
   "upcoming": [],
