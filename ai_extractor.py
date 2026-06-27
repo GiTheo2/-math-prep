@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Use Claude Code CLI to extract action items from email metadata."""
-import json, subprocess
+import json, re, subprocess
 from datetime import datetime
 
 CLAUDE_BIN = '/Users/theodaude/.local/bin/claude'
@@ -8,8 +8,8 @@ CLAUDE_BIN = '/Users/theodaude/.local/bin/claude'
 
 def _call_claude(prompt: str) -> str:
     result = subprocess.run(
-        [CLAUDE_BIN, '-p', prompt],
-        capture_output=True, text=True, timeout=60
+        [CLAUDE_BIN, '-p', '--output-format', 'text'],
+        input=prompt, capture_output=True, text=True, timeout=120
     )
     return result.stdout.strip()
 
@@ -27,7 +27,16 @@ def extract_tasks(emails: list) -> list:
 
     prompt = f"""Today is {today}.
 
-Review these emails and extract ONLY the ones that require a specific action or contain a deadline. Ignore newsletters, promotions, automated notifications, receipts, and purely informational emails.
+Review these emails and extract ONLY the ones that require a specific action or contain a deadline.
+
+Include as action items:
+- Any real person replying to outreach or contact form (even if it's a "not interested")
+- Email delivery failures / bounces → action is to remove that email from the list
+- Upwork / freelance platform job notifications that match AI/automation work
+- Client or lead emails
+- Payment, invoice, or deadline emails
+
+Ignore: newsletters, promotional offers, Google/platform security alerts (unless suspicious), receipts for known services, and purely informational automated reports.
 
 Return a JSON array. Each item must have exactly these fields:
 {{
@@ -57,10 +66,16 @@ Respond with ONLY the JSON array, nothing else. If no action items, return [].""
 
     try:
         text = _call_claude(prompt)
-        start, end = text.find('['), text.rfind(']') + 1
-        if start >= 0 and end > start:
-            return json.loads(text[start:end])
-        return []
+        # Strip markdown code fences and single backtick wrapping
+        text = re.sub(r'```(?:json)?\s*', '', text)
+        text = re.sub(r'`(\[.*?\])`', r'\1', text, flags=re.DOTALL)
+        text = text.strip()
+        start = text.find('[')
+        if start < 0:
+            return []
+        # Use raw_decode to stop at natural end of JSON array (ignores trailing text)
+        result, _ = json.JSONDecoder().raw_decode(text, start)
+        return result if isinstance(result, list) else []
     except Exception as e:
         print(f'[error] AI extraction: {e}')
         return []

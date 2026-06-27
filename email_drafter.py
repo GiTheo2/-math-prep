@@ -9,8 +9,8 @@ CONTEXT_FILE = Path(__file__).parent / 'business_context.md'
 
 def _call_claude(prompt: str) -> str:
     result = subprocess.run(
-        [CLAUDE_BIN, '-p', prompt],
-        capture_output=True, text=True, timeout=90
+        [CLAUDE_BIN, '-p', '--output-format', 'text'],
+        input=prompt, capture_output=True, text=True, timeout=120
     )
     return result.stdout.strip()
 

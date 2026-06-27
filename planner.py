@@ -78,7 +78,7 @@ def main(dry_run: bool = False):
 
     # 2. Extract + deduplicate tasks
     from ai_extractor import extract_tasks
-    tasks = extract_tasks(emails)
+    tasks = [t for t in extract_tasks(emails) if isinstance(t, dict)]
     seen, unique_tasks = set(), []
     for t in tasks:
         key = (t.get('label', '').lower().strip(), t.get('due'), t.get('source'))
@@ -111,7 +111,8 @@ def main(dry_run: bool = False):
                 print(f'  → {t["label"]}')
 
     # 6. Build and write today.json
-    today_tasks = [t for t in tasks if t.get('due') == today_str]
+    # Items due today OR with no deadline (act on them today)
+    today_tasks = [t for t in tasks if not t.get('due') or t.get('due') == today_str]
     upcoming = sorted(
         [t for t in tasks if t.get('due') and t.get('due') > today_str],
         key=lambda t: t['due']
