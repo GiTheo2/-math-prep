@@ -609,6 +609,75 @@
           "status": "done"
         }
       ]
+    },
+    {
+      "id": "sequences-deep",
+      "book": "Abbott - Understanding Analysis (Phase 3 deeper)",
+      "chapter": 0,
+      "title": "Sequences & Series — Advanced",
+      "deck": "Mathematics::04 - Sequences & Series",
+      "concepts": [
+        {
+          "id": "comparison-test",
+          "label": "Comparison Test for series: if 0 ≤ aₙ ≤ bₙ and Σbₙ converges then Σaₙ converges; if Σaₙ diverges then Σbₙ diverges (proof both directions)",
+          "status": "done"
+        },
+        {
+          "id": "limit-comparison-test",
+          "label": "Limit Comparison Test: if aₙ,bₙ > 0 and lim(aₙ/bₙ) = L with 0 < L < ∞, then Σaₙ and Σbₙ either both converge or both diverge (proof)",
+          "status": "done"
+        },
+        {
+          "id": "ratio-test",
+          "label": "Ratio Test (D'Alembert): if lim|aₙ₊₁/aₙ| = L then L<1 → absolute convergence, L>1 → divergence, L=1 → inconclusive; proof and canonical examples showing L=1 can go either way",
+          "status": "done"
+        },
+        {
+          "id": "root-test",
+          "label": "Root Test (Cauchy): if limsup|aₙ|^(1/n) = L then L<1 → absolute convergence, L>1 → divergence, L=1 → inconclusive; proof",
+          "status": "done"
+        },
+        {
+          "id": "alternating-series-test",
+          "label": "Alternating Series Test (Leibniz): if (bₙ) is decreasing and bₙ→0 then Σ(-1)ⁿbₙ converges; error bound |Rₙ| ≤ bₙ₊₁ (proof)",
+          "status": "done"
+        },
+        {
+          "id": "limsup-liminf-def",
+          "label": "Limsup and liminf — formal definitions as limits of sup/inf of tails: limsup aₙ = lim(sup{aₖ : k≥n}); key properties and why they always exist for bounded sequences",
+          "status": "done"
+        },
+        {
+          "id": "cauchy-hadamard",
+          "label": "Cauchy-Hadamard formula for radius of convergence: 1/R = limsup|aₙ|^(1/n); proof that the power series Σaₙxⁿ converges absolutely for |x|<R and diverges for |x|>R",
+          "status": "done"
+        },
+        {
+          "id": "weierstrass-m-test",
+          "label": "Weierstrass M-test: if |fₙ(x)| ≤ Mₙ for all x in A and ΣMₙ converges, then Σfₙ converges uniformly (and absolutely) on A — proof and how to apply it",
+          "status": "done"
+        },
+        {
+          "id": "uniform-convergence-differentiation",
+          "label": "Differentiating uniformly convergent series: if fₙ differentiable, Σfₙ converges pointwise, and Σfₙ' converges uniformly, then (Σfₙ)' = Σfₙ' — proof and why uniform convergence of fₙ alone is not enough",
+          "status": "done"
+        },
+        {
+          "id": "taylor-series-def",
+          "label": "Taylor series of f at a: Σ f^(n)(a)/n! (x−a)ⁿ; definition of analytic function; why a function can be C∞ yet NOT equal its Taylor series (Cauchy's example e^{−1/x²})",
+          "status": "done"
+        },
+        {
+          "id": "taylor-series-standard",
+          "label": "Standard Taylor series at 0 with radii of convergence: e^x (R=∞), sin x (R=∞), cos x (R=∞), ln(1+x) (R=1), 1/(1−x) (R=1) — derivations from term-by-term differentiation",
+          "status": "done"
+        },
+        {
+          "id": "riemann-rearrangement",
+          "label": "Riemann Rearrangement Theorem: if Σaₙ converges conditionally (not absolutely), then for any L∈ℝ there exists a rearrangement converging to L; contrast with absolutely convergent series (rearrangements all give same sum)",
+          "status": "done"
+        }
+      ]
     }
   ]
 }
