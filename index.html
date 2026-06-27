@@ -102,6 +102,11 @@ textarea:focus { border-color: rgba(59,108,183,0.5); }
 .rm-name.dim { color: rgba(240,244,255,0.32); }
 .rm-wks { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-left: 7px; }
 .rm-sub { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+.dl-badge.email       { background: rgba(147,112,219,0.2);  color: #a78bfa; }
+.dl-badge.email-high  { background: var(--red-dim);          color: var(--red); }
+.section-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.section-count { font-family: var(--mono); font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; }
+.section-count.urgent { color: var(--accent); }
 
 /* ── Desktop: 3-column, one page ── */
 @media (min-width: 780px) {
@@ -167,6 +172,20 @@ textarea:focus { border-color: rgba(59,108,183,0.5); }
         <div class="days-num" id="days-num">0</div>
         <div class="days-lbl">days logged</div>
       </div>
+    </div>
+  </div>
+
+  <!-- Daily priorities (email-extracted) -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="section-header" onclick="togglePlanner()">
+      <span class="label" style="margin:0">Today's priorities</span>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="section-count" id="planner-count"></span>
+        <button class="show-btn" id="planner-toggle" style="pointer-events:none">Show</button>
+      </div>
+    </div>
+    <div id="planner-body" style="display:none;margin-top:10px">
+      <div id="planner-list"><div class="dl-empty">Loading…</div></div>
     </div>
   </div>
 
@@ -279,7 +298,7 @@ function renderDeadlines(deadlines){
   st.textContent=ov?`${ov} overdue`:`${items.length} upcoming`;
   if(ov)st.style.color='var(--red)';
   el.innerHTML=items.map(d=>{
-    const over=d.dl<0,badge=over?'overdue':(d.type||'math'),blabel=over?'Overdue':d.type==='reillum'?'Rei':'Math';
+    const over=d.dl<0,badge=over?'overdue':(d.type||'math'),blabel=over?'Overdue':d.type==='reillum'?'Rei':d.type==='email'?(d.action_verb||'Email'):'Math';
     let dc='ok',dl='';
     if(over){dc='past';dl=Math.abs(d.dl)+'d ago';}
     else if(d.dl===0){dc='urgent';dl='Today';}
@@ -323,8 +342,51 @@ function startEdit(){document.getElementById('goal-input').value=(load().weeklyG
 function saveGoal(){const data=load();data.weeklyGoals[isoWeekKey()]=document.getElementById('goal-input').value.trim();save(data);cancelEdit();render();}
 function cancelEdit(){document.getElementById('goal-display').style.display='block';document.getElementById('goal-editor').style.display='none';document.querySelector('.edit-btn').style.display='block';}
 function toggleTest(btn){const el=document.getElementById('self-test');btn.textContent=el.classList.toggle('on')?'Hide':'Show';}
+// ── Planner ──────────────────────────────────────────────────────────────
+let _plannerOpen = false;
+function togglePlanner(){
+  _plannerOpen=!_plannerOpen;
+  document.getElementById('planner-body').style.display=_plannerOpen?'block':'none';
+  document.getElementById('planner-toggle').textContent=_plannerOpen?'Hide':'Show';
+}
+
+async function loadToday(){
+  try{const r=await fetch('./today.json?_='+Date.now());return await r.json();}catch{return null;}
+}
+
+function renderPlanner(data){
+  const countEl=document.getElementById('planner-count');
+  const listEl=document.getElementById('planner-list');
+  const items=[...(data?.today||[]),...(data?.upcoming||[])].slice(0,8);
+  if(!items.length){
+    countEl.textContent='all clear';
+    listEl.innerHTML='<div class="dl-empty">No urgent items today.</div>';
+    return;
+  }
+  const highCount=items.filter(t=>t.priority==='high').length;
+  countEl.textContent=highCount?`${items.length} items · ${highCount} urgent`:`${items.length} items`;
+  if(highCount)countEl.classList.add('urgent');
+  if(highCount>0&&!_plannerOpen)togglePlanner();
+  listEl.innerHTML=items.map(t=>{
+    const isHigh=t.priority==='high',badge=isHigh?'email-high':'email',verb=t.action_verb||'DO';
+    const dl=t.due?daysUntil(t.due):null;
+    let dc='ok',dlabel='';
+    if(dl!==null){if(dl<0){dc='past';dlabel=Math.abs(dl)+'d ago';}else if(dl===0){dc='urgent';dlabel='Today';}else if(dl<=3){dc='urgent';dlabel=dl+'d';}else if(dl<=7){dc='soon';dlabel=dl+'d';}else{dc='ok';dlabel=dl+'d';}}
+    return`<div class="deadline-item"><div class="dl-badge ${badge}">${esc(verb)}</div><div class="dl-content"><div class="dl-label">${esc(t.label)}</div><div class="dl-desc">${esc(t.desc||'')}</div></div>${dl!==null?`<div class="dl-right"><div class="dl-days ${dc}">${dlabel}</div><div class="dl-date">${formatDue(t.due)}</div></div>`:''}</div>`;
+  }).join('');
+}
+
+function mergeEmailDeadlines(mathDeadlines,todayData){
+  if(!todayData)return mathDeadlines;
+  const emailItems=(todayData.upcoming||[]).filter(t=>t.due).map(t=>({...t,type:'email'}));
+  return[...mathDeadlines,...emailItems];
+}
+
 render();
-loadDeadlines().then(renderDeadlines);
+Promise.all([loadDeadlines(),loadToday()]).then(([deadlines,todayData])=>{
+  renderPlanner(todayData);
+  renderDeadlines(mergeEmailDeadlines(deadlines,todayData));
+});
 </script>
 </body>
 </html>
