@@ -111,8 +111,11 @@ def main(dry_run: bool = False):
                 print(f'  → {t["label"]}')
 
     # 6. Build and write today.json
+    from math_daily import daily_tasks
+    math_tasks = daily_tasks()
+
     # Items due today OR with no deadline (act on them today)
-    today_tasks = [t for t in tasks if not t.get('due') or t.get('due') == today_str]
+    today_tasks = math_tasks + [t for t in tasks if not t.get('due') or t.get('due') == today_str]
     upcoming = sorted(
         [t for t in tasks if t.get('due') and t.get('due') > today_str],
         key=lambda t: t['due']
