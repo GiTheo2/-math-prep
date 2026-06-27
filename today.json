@@ -1,17 +1,59 @@
 {
-  "generated": "2026-06-27T14:50:27.123672",
+  "generated": "2026-06-27T15:36:35.540913",
   "today": [
     {
-      "id": "e-7",
+      "id": "e-1",
+      "email_id": "19f06e5c1acb1b5c",
+      "thread_id": "19f06e5c1acb1b5c",
       "type": "email",
-      "priority": "high",
-      "label": "Review new lead submission",
-      "desc": "New form submission received from test lead on 2026-06-26; requires follow-up within 24 hours as promised in auto-reply.",
+      "priority": "medium",
+      "label": "Review Upwork AI automation architect job",
+      "desc": "An Upwork job alert for an AI automation architect paid discovery/build matches your AI work and should be reviewed for a proposal.",
       "source": "professional",
-      "due": "2026-06-27",
+      "due": null,
       "action_verb": "REVIEW",
-      "calendar_event_id": "r8d0nualeosu963e7e6ua21u24"
+      "needs_draft": false
+    },
+    {
+      "id": "e-2",
+      "email_id": "19f06a4bfd556c0e",
+      "thread_id": "19f06a4bfd556c0e",
+      "type": "email",
+      "priority": "medium",
+      "label": "Review Upwork Fix Zapier Automation job",
+      "desc": "An Upwork job alert for fixing a Zapier automation matches your automation work and should be reviewed for a proposal.",
+      "source": "professional",
+      "due": null,
+      "action_verb": "REVIEW",
+      "needs_draft": false
+    },
+    {
+      "id": "e-3",
+      "email_id": "19f084b2b266dc8c",
+      "thread_id": "19f084b2b266dc8c",
+      "type": "email",
+      "priority": "medium",
+      "label": "Remove info@orlandopooltech.com from list",
+      "desc": "Outreach to Orlando Pool Tech bounced because the address could not be found, so remove it from the outreach list.",
+      "source": "professional",
+      "due": null,
+      "action_verb": "REVIEW",
+      "needs_draft": false
+    },
+    {
+      "id": "e-4",
+      "email_id": "19f084b115151a8c",
+      "thread_id": "19f084b0bd933f8a",
+      "type": "email",
+      "priority": "medium",
+      "label": "Remove Perez Pool Cleaning email from list",
+      "desc": "Outreach to support@mg.perezpoolcleaning.com bounced because the domain could not be found, so remove it from the outreach list.",
+      "source": "professional",
+      "due": null,
+      "action_verb": "REVIEW",
+      "needs_draft": false
     }
   ],
-  "upcoming": []
+  "upcoming": [],
+  "drafts": []
 }
