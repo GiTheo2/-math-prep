@@ -1,5 +1,26 @@
 {
-  "generated": "2026-06-27T00:00:00",
-  "today": [],
+  "generated": "2026-06-27T14:34:55.979565",
+  "today": [
+    {
+      "id": "e-7",
+      "type": "email",
+      "priority": "high",
+      "label": "Review new lead submission from test lead",
+      "desc": "New form submission received on 2026-06-26; you committed to respond within 24 hours.",
+      "source": "professional",
+      "due": "2026-06-27",
+      "action_verb": "REVIEW"
+    },
+    {
+      "id": "e-61",
+      "type": "email",
+      "priority": "high",
+      "label": "Review new lead submission from test lead",
+      "desc": "New form submission received on 2026-06-26; you committed to respond within 24 hours.",
+      "source": "professional",
+      "due": "2026-06-27",
+      "action_verb": "REVIEW"
+    }
+  ],
   "upcoming": []
 }
