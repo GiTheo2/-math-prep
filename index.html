@@ -372,7 +372,8 @@ function renderPlanner(data){
     const dl=t.due?daysUntil(t.due):null;
     let dc='ok',dlabel='';
     if(dl!==null){if(dl<0){dc='past';dlabel=Math.abs(dl)+'d ago';}else if(dl===0){dc='urgent';dlabel='Today';}else if(dl<=3){dc='urgent';dlabel=dl+'d';}else if(dl<=7){dc='soon';dlabel=dl+'d';}else{dc='ok';dlabel=dl+'d';}}
-    return`<div class="deadline-item"><div class="dl-badge ${badge}">${esc(verb)}</div><div class="dl-content"><div class="dl-label">${esc(t.label)}</div><div class="dl-desc">${esc(t.desc||'')}</div></div>${dl!==null?`<div class="dl-right"><div class="dl-days ${dc}">${dlabel}</div><div class="dl-date">${formatDue(t.due)}</div></div>`:''}</div>`;
+    const link=t.gmail_link?`<a href="${t.gmail_link}" target="_blank" style="font-family:var(--mono);font-size:9px;color:var(--primary);text-decoration:none;margin-top:3px;display:inline-block">↗ open email</a>`:'';
+    return`<div class="deadline-item"><div class="dl-badge ${badge}">${esc(verb)}</div><div class="dl-content"><div class="dl-label">${esc(t.label)}</div><div class="dl-desc">${esc(t.desc||'')}</div>${link}</div>${dl!==null?`<div class="dl-right"><div class="dl-days ${dc}">${dlabel}</div><div class="dl-date">${formatDue(t.due)}</div></div>`:''}</div>`;
   }).join('');
 }
 
