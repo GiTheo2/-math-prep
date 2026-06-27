@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 """Auto-draft Gmail replies using Claude Code CLI."""
-import json, subprocess, base64, email as email_lib
+import json, os, subprocess, base64, email as email_lib
 from pathlib import Path
 
 CLAUDE_BIN = '/Users/theodaude/.local/bin/claude'
+_ENV = {k: v for k, v in os.environ.items() if k != 'ANTHROPIC_API_KEY'}
 CONTEXT_FILE = Path(__file__).parent / 'business_context.md'
 
 
 def _call_claude(prompt: str) -> str:
     result = subprocess.run(
         [CLAUDE_BIN, '-p', '--output-format', 'text'],
-        input=prompt, capture_output=True, text=True, timeout=120
+        input=prompt, capture_output=True, text=True, timeout=120,
+        env=_ENV
     )
     return result.stdout.strip()
 

@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 """Use Claude Code CLI to extract action items from email metadata."""
-import json, re, subprocess
+import json, os, re, subprocess
 from datetime import datetime
 
 CLAUDE_BIN = '/Users/theodaude/.local/bin/claude'
+
+# Strip API key so claude CLI uses Claude Code subscription, not paid API credits
+_ENV = {k: v for k, v in os.environ.items() if k != 'ANTHROPIC_API_KEY'}
 
 
 def _call_claude(prompt: str) -> str:
     result = subprocess.run(
         [CLAUDE_BIN, '-p', '--output-format', 'text'],
-        input=prompt, capture_output=True, text=True, timeout=120
+        input=prompt, capture_output=True, text=True, timeout=120,
+        env=_ENV
     )
     return result.stdout.strip()
 
