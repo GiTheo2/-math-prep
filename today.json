@@ -1,6 +1,53 @@
 {
-  "generated": "2026-06-27T16:02:21.121409",
-  "today": [],
+  "generated": "2026-06-29T21:33:53.459367",
+  "today": [
+    {
+      "label": "Anki \u2014 02 - Real Analysis \u00b7 10 new cards",
+      "due": "2026-06-29",
+      "source": "math",
+      "priority": "high",
+      "action_verb": "ANKI",
+      "desc": "Phase 1 \u2014 Epsilon-Delta (Week 1/43, week 1/2 of this block).\nOpen deck 'Mathematics::02 - Real Analysis'. Reviews first, then 10 new cards."
+    },
+    {
+      "label": "Read \u2014 Abbott Ch. 1",
+      "due": "2026-06-29",
+      "source": "math",
+      "priority": "high",
+      "action_verb": "READ",
+      "desc": "The Real Numbers. 20\u201330 min \u2014 focus on definitions and proof structure, not speed. Mark anything you cannot reconstruct from memory."
+    },
+    {
+      "label": "Exercises \u2014 completeness axiom and supremum proofs",
+      "due": "2026-06-29",
+      "source": "math",
+      "priority": "normal",
+      "action_verb": "EXERCISES",
+      "desc": "python3 exercises.py \"completeness axiom and supremum proofs\" 2 3\nDifficulty 2 (standard), 3 problems. Write proofs in full \u2014 no shortcuts."
+    },
+    {
+      "id": "e-1",
+      "email_id": "19f14c555668db30",
+      "thread_id": "19f0862221930263",
+      "type": "email",
+      "priority": "high",
+      "label": "REPLY to Ever Peralta \u2014 not interested response from Triton Pools",
+      "desc": "Ever Peralta from Triton Pools replied to Theo's cold outreach saying they're not interested at this time.",
+      "source": "professional",
+      "due": "2026-06-29",
+      "action_verb": "REPLY",
+      "needs_draft": true,
+      "calendar_event_id": "onqk7oehj46ma0dlgda9gm73dc",
+      "gmail_link": "https://mail.google.com/mail/u/hello@reillum.com/#all/19f0862221930263"
+    }
+  ],
   "upcoming": [],
-  "drafts": []
+  "drafts": [
+    {
+      "task_label": "REPLY to Ever Peralta \u2014 not interested response from Triton Pools",
+      "draft_id": "r3925076087726019547",
+      "preview": "Got it \u2014 no problem, Ever. I'll check back in a few months in case things change.\n\nGood luck with the season.\n\nTheo | Re\u2026",
+      "account": "professional"
+    }
+  ]
 }
